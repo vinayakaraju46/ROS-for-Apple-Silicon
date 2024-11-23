@@ -35,7 +35,7 @@ Ensure the following are installed on your macOS system:
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/vinayakaraju46/roslabs-ros-noetic.git
    cd <repository-directory>
 
 2. Build the Docker image:
@@ -46,31 +46,32 @@ Ensure the following are installed on your macOS system:
 
 1. Start the container:
    ```bash
-   docker run -it -p 8080:8080 -p 5901:5901 ros-noetic-env
+   sudo docker run -it --platform=linux/amd64 -p 4000:5000 -p 4080:6080 -p 4081:6081 -p 4082:6082 -p 11311:11311 --name ros-sim ros-noetic-env
+   ```
+   - `4000`: ttyd
+   - `4080`: vnc
+   - `4082`: code-server
    
-2. Once inside the container:
-   1. Start the VNC server:
+2. Getting inside the container:
+
+  
+   1. Attach to Container:
+      ```bash
+      sudo docker attach <container-id>
+      
+   2. Re-start the VNC server:
       ```bash
       restart-vncserver
       
-   2. Launch code-server:
+   2. Launch code-server for VSCode:
       ```bash
       start-codeserver
 
-   3. Start NoVNC:
-      ```bash
-      start-novnc <vnc-port> <novnc-port>
-
-   4. Start TTYD terminal:
-      ```bash
-      start-ttyd <port>
-
   ---
   ## Access the Environment
-  - **VNC**: Open your browser and navigate to `http://localhost:5901`.
-  - **Code Server**: Navigate to `http://localhost:8080`.
-  - **NoVNC**: Navigate to `http://localhost:<novnc-port>`.
-  - **Web Terminal (TTYD)**: Navigate to `http://localhost:<ttyd-port>`.
+  - **VNC**: Open your browser and navigate to `http://localhost:4000`.
+  - **Code Server**: Navigate to `http://localhost:4082`.
+  - **Web Terminal (TTYD)**: Navigate to `http://localhost:4000`.
 
       
 
