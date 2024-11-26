@@ -1,6 +1,6 @@
-# ROS Noetic Docker Environment on macOS (Silicon)
+# ROS Docker Environment on macOS (Apple Silicon)
 
-This project sets up a Docker-based virtual environment to run ROS Noetic with support for Gazebo and V-REP/Virtual Robotics Experimentation Platform. The setup is tailored for macOS devices with Apple Silicon chips, using a Linux/amd64 base image to ensure compatibility.
+This project sets up a Docker-based virtual environment to run ROS with support for Gazebo and V-REP/Virtual Robotics Experimentation Platform. The setup is tailored for macOS devices with Apple Silicon chips, using a Linux/amd64 base image to ensure compatibility.
 
 ---
 
@@ -40,13 +40,13 @@ Ensure the following are installed on your macOS system:
 
 2. Build the Docker image:
    ```bash
-   docker build -t ros-noetic-env .
+   docker build -t <build-name> .
 
 ## Run the Docker Container
 
 1. Start the container:
    ```bash
-   sudo docker run -it --platform=linux/amd64 -p 4000:5000 -p 4080:6080 -p 4081:6081 -p 4082:6082 -p 11311:11311 --name ros-sim ros-noetic-env
+   sudo docker run -it --platform=linux/amd64 -p 4000:5000 -p 4080:6080 -p 4081:6081 -p 4082:6082 -p 11311:11311 --name <container-name> <build-name>
    ```
    - `4000`: ttyd
    - `4080`: vnc
@@ -57,7 +57,7 @@ Ensure the following are installed on your macOS system:
   
    1. Attach to Container:
       ```bash
-      sudo docker attach <container-id>
+      sudo docker attach <container-name>
       
    2. Re-start the VNC server:
       ```bash
