@@ -33,6 +33,12 @@ Ensure the following are installed on your macOS system:
 
 ## Build the Docker Image
 
+**⚠️ Alert:**
+```bash
+   sudo docker pull docker pull --platform=linux/amd64 ubuntu:20.04
+```
+   
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/vinayakaraju46/ROS-for-Apple-Silicon.git
