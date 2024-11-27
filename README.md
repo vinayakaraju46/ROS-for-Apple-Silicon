@@ -35,22 +35,23 @@ Ensure the following are installed on your macOS system:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/vinayakaraju46/roslabs-ros-noetic.git
-   cd <repository-directory>
+   git clone https://github.com/vinayakaraju46/ROS-for-Apple-Silicon.git
+   cd <repository-directory>/ros-simulation
 
 2. Build the Docker image:
    ```bash
-   docker build -t <build-name> .
+   sudo docker-compose build --no-cache
 
 ## Run the Docker Container
 
 1. Start the container:
    ```bash
-   sudo docker run -it --platform=linux/amd64 -p 4000:5000 -p 4080:6080 -p 4081:6081 -p 4082:6082 -p 11311:11311 --name <container-name> <build-name>
+   sudo docker-compose up
    ```
    - `4000`: ttyd
-   - `4080`: vnc
-   - `4082`: code-server
+   - `4001`: vnc
+   - `4002`: vs-code
+   - `4003`: ros-master-uri
    
 2. Getting inside the container:
 
@@ -62,6 +63,8 @@ Ensure the following are installed on your macOS system:
    2. Re-start the VNC server:
       ```bash
       restart-vncserver
+
+      #Enter passcode as 121212
       
    2. Launch code-server for VSCode:
       ```bash
@@ -70,7 +73,7 @@ Ensure the following are installed on your macOS system:
   ---
   ## Access the Environment
   - **VNC**: Open your browser and navigate to `http://localhost:4000`.
-  - **Code Server**: Navigate to `http://localhost:4082`.
+  - **Code Server**: Navigate to `http://localhost:4002`.
   - **Web Terminal (TTYD)**: Navigate to `http://localhost:4000`.
 
       
