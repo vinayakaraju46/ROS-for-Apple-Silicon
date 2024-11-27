@@ -33,9 +33,9 @@ Ensure the following are installed on your macOS system:
 
 ## Build the Docker Image
 
-**⚠️ Alert:**
+**⚠️ Note:** Don't forget to pull the image
 ```bash
-   sudo docker pull docker pull --platform=linux/amd64 ubuntu:20.04
+   sudo docker pull --platform=linux/amd64 ubuntu:20.04
 ```
    
 
