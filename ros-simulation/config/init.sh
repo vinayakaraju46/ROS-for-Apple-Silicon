@@ -7,13 +7,14 @@ export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" &&
 
 apt -y update && 
 
-# Set up the VNC password
-mkdir -p ~/.vnc
-echo "$VNC_PASSWD" | vncpasswd -f > ~/.vnc/passwd
-chmod 600 ~/.vnc/passwd
+rm -rf /tmp/.X1-lock
+# killall websockify Xtigervnc ttyd launch.sh
 
+mkdir -p /root/.vnc
+echo $VNC_PASSWD | vncpasswd -f > /root/.vnc/passwd 
+vncserver -kill :1
+vncserver -PasswordFile /root/.vnc/passwd :1 &
 
-vncserver 
 ttyd -p $TTYD_PORT bash &
 /usr/share/novnc/utils/launch.sh --vnc 127.0.0.1:5901 --listen $NOVNC_PORT &
 
