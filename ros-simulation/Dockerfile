@@ -21,7 +21,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     apt -y install x11vnc && \
     echo 'source /opt/ros/noetic/setup.bash' >> ~/.bashrc && \
     echo "alias restart-vncserver='bash /config/restartvncserver.sh'" >> ~/.bashrc \
-    && echo "alias start-codeserver='cd /code-server-4.3.0-linux-amd64 && ./code-server --bind-addr 0.0.0.0:6082 --auth none'" >> ~/.bashrc \
+    && echo "alias start-codeserver='cd /code-server-4.3.0-linux-amd64 && ./code-server --bind-addr 0.0.0.0:8080 --auth none'" >> ~/.bashrc \
     && echo 'start-novnc() { /usr/share/novnc/utils/launch.sh --vnc 127.0.0.1:$1 --listen $2 & }' >> ~/.bashrc \
     && echo 'start-ttyd() {' >> ~/.bashrc \
     && echo '    killall -9 ttyd' >> ~/.bashrc \
