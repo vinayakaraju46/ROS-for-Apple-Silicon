@@ -78,9 +78,9 @@ Ensure the following are installed on your macOS system:
 
   ---
   ## Access the Environment
-  - **VNC**: Open your browser and navigate to `http://localhost:4000`.
-  - **Code Server**: Navigate to `http://localhost:4002`.
-  - **Web Terminal (TTYD)**: Navigate to `http://localhost:4000`.
+  - **VNC**: Open your browser and navigate to `http://localhost:2080`.
+  - **Code Server**: Navigate to `http://localhost:2082`.
+  - **Web Terminal (TTYD)**: Navigate to `http://localhost:2000`.
 
       
 
