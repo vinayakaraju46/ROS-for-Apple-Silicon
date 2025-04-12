@@ -1,6 +1,7 @@
-FROM --platform=linux/amd64 ubuntu:22.04
+FROM --platform=linux/amd64 osrf/ros:foxy-desktop
 
 COPY config /config
+COPY config/xstartup /root/.vnc/xstartup
 
 RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     apt -y update && \
@@ -17,7 +18,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
     apt -y install xfce4 xfce4-goodies && \
     apt -y install x11vnc && \
-    echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc && \
+    echo 'source /opt/ros/foxy/setup.bash' >> ~/.bashrc && \
+    echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc && \
+    # echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc && \
     echo "alias restart-vncserver='bash /config/restartvncserver.sh'" >> ~/.bashrc \
     && echo "alias start-codeserver='cd /code-server-4.3.0-linux-amd64 && ./code-server --bind-addr 0.0.0.0:8080 --auth none'" >> ~/.bashrc \
     && echo 'start-novnc() { /usr/share/novnc/utils/launch.sh --vnc 127.0.0.1:$1 --listen $2 & }' >> ~/.bashrc \
