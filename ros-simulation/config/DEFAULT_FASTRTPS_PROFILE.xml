@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profiles xmlns="http://www.eprosima.com/XMLSchemas/Ros2FastRtpsProfiles">
+  <profile>
+    <name>default</name>
+    <transport_descriptors>
+      <transport_descriptor>
+        <type>UDPv4</type>
+        <interface>
+          <address>0.0.0.0</address>
+        </interface>
+      </transport_descriptor>
+    </transport_descriptors>
+    <rtps>
+      <builtin>
+        <discovery_config>
+          <multicast>false</multicast>
+        </discovery_config>
+      </builtin>
+    </rtps>
+  </profile>
+  <profile>
+    <name>ros2_communication</name>
+    <transport_descriptors>
+      <transport_descriptor>
+        <type>UDPv4</type>
+        <interface>
+          <address>172.31.23.244</address> <!-- Replace with host machine's IP -->
+        </interface>
+      </transport_descriptor>
+      <transport_descriptor>
+        <type>UDPv4</type>
+        <interface>
+          <address>192.168.65.3</address> <!-- Replace with container's IP -->
+        </interface>
+      </transport_descriptor>
+      <transport_descriptor>
+        <type>UDPv4</type>
+        <interface>
+         <address>192.168.65.254</address> <!-- Replace with container's IP -->
+        </interface>
+      </transport_descriptor>
+    </transport_descriptors>
+    <rtps>
+      <builtin>
+        <discovery_config>
+          <multicast>false</multicast>
+        </discovery_config>
+      </builtin>
+    </rtps>
+  </profile>
+</profiles>

@@ -1,0 +1,7 @@
+<CycloneDDS>
+  <Discovery>
+    <Peers>
+      <Peer address="host.docker.internal"/>
+    </Peers>
+  </Discovery>
+</CycloneDDS>

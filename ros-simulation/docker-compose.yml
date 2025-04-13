@@ -5,11 +5,13 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: ros2-simulation-${ENV}
-    networks:
-        ros2-simulation:
-          ipv4_address: ${BASE_NET_RANGE}.4
+    
+    network_mode: "host"
+    
     environment:
       - ENV
+      - RMW_IMPLEMENTATION=rmw_cyclone_dds_cpp
+      - ROS_DOMAIN_ID=42
     ports:
       - "${TTYD_PORT}:5000"
       - "${NO_VNC_PORT}:6080"
