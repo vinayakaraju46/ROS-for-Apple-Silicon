@@ -1,12 +1,12 @@
 version: '3.8'
 services:
-  ros-simulation:
+  ros2-simulation:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ros-simulation-${ENV}
+    container_name: ros2-simulation-${ENV}
     networks:
-        ros-simulation:
+        ros2-simulation:
           ipv4_address: ${BASE_NET_RANGE}.4
     environment:
       - ENV
@@ -23,8 +23,8 @@ services:
 
 
 networks:
-  ros-simulation:
-    name: ros-simulation-${ENV}
+  ros2-simulation:
+    name: ros2-simulation-${ENV}
     driver: bridge
     ipam:
       driver: default
