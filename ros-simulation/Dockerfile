@@ -1,6 +1,7 @@
 FROM --platform=linux/amd64 ubuntu:22.04
 
 COPY config /config
+# COPY config/xstartup /root/.vnc/xstartup
 
 RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     apt -y update && \
@@ -17,7 +18,12 @@ RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
     apt -y install xfce4 xfce4-goodies && \
     apt -y install x11vnc && \
-    echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc && \
+    echo 'export RMW_IMPLEMENTATION=rmw_fastrtps_cpp' >> ~/.bashrc && \
+    echo 'export CYCLONEDDS_URI=/config/cyclonedds.xml' >> ~/.bashrc && \
+    echo 'export FASTRTPS_DEFAULT_PROFILES_FILE=/config/DEFAULT_FASTRTPS_PROFILES.xml' >> ~/.bashrc && \
+    echo 'export ROS_DOMAIN_ID=0  # Replace with your Domain ID' >> ~/.bashrc && \
+    # echo "127.0.1.1 $(hostname)" >> /etc/hosts && \
+    # echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc && \
     echo "alias restart-vncserver='bash /config/restartvncserver.sh'" >> ~/.bashrc \
     && echo "alias start-codeserver='cd /code-server-4.3.0-linux-amd64 && ./code-server --bind-addr 0.0.0.0:8080 --auth none'" >> ~/.bashrc \
     && echo 'start-novnc() { /usr/share/novnc/utils/launch.sh --vnc 127.0.0.1:$1 --listen $2 & }' >> ~/.bashrc \

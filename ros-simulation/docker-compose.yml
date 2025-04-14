@@ -8,6 +8,7 @@ services:
     networks:
         ros-simulation:
           ipv4_address: ${BASE_NET_RANGE}.4
+    hostname: ros-sim.local
     environment:
       - ENV
     ports:
@@ -15,6 +16,10 @@ services:
       - "${NO_VNC_PORT}:6080"
       - "${VS_CODE_PORT}:8080"
       - "${ROS_MASTER_URI_PORT}:11311"
+      - "7400:7400/udp"   # Fast DDS discovery port
+      - "7410:7410/udp"   # Participant data
+      - "50000-50010:50000-50010/udp"  # RTPS messages (range can be expanded)
+    
     stdin_open: true
     tty: true
     volumes:
