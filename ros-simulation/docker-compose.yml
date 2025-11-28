@@ -5,12 +5,15 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: ros-simulation-${ENV}
-    networks:
-        ros-simulation:
-          ipv4_address: ${BASE_NET_RANGE}.4
-    hostname: ros-sim.local
+    # network_mode: "host"
     environment:
       - ENV
+      - WEBOTS_HOME=/webots
+      - ROS_DOMAIN_ID=0
+      - ROS_LOCALHOST_ONLY=0
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - DISPLAY=host.docker.internal:0
+    privileged: true
     ports:
       - "${TTYD_PORT}:5000"
       - "${NO_VNC_PORT}:6080"
@@ -19,19 +22,24 @@ services:
       - "7400:7400/udp"   # Fast DDS discovery port
       - "7410:7410/udp"   # Participant data
       - "50000-50010:50000-50010/udp"  # RTPS messages (range can be expanded)
+      - "8765:8765"
+      # - "7401-7500:7401-7500/udp"
     
     stdin_open: true
     tty: true
     volumes:
       - ./config:/config
+      - /Applications/Webots.app/Contents/MacOS:/webots
+      - /tmp:/tmp # optional, for sockets
+      - /tmp/.X11-unix:/tmp/.X11-unix 
 
 
 
-networks:
-  ros-simulation:
-    name: ros-simulation-${ENV}
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: ${BASE_NET_RANGE}.0/24
+# networks:
+#   ros-simulation:
+#     name: ros-simulation-${ENV}
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: ${BASE_NET_RANGE}.0/24

@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:22.04
+FROM --platform=linux/amd64 moveit/moveit2:humble-source
 
 COPY config /config
 # COPY config/xstartup /root/.vnc/xstartup

@@ -5,7 +5,7 @@
 #pid=$(echo "$output" | grep "Killing Xtightvnc process ID" | awk '{print $NF}')
 rm -rf /tmp/.X1-lock
 for display_num in {1..10}; do
-  output=$(vncserver -kill ":$display_num" > /dev/null 2>&1)
+  output=$(vncserver kill ":$display_num" > /dev/null 2>&1)
   pid=$(echo "$output" | grep "Killing Xtightvnc process ID" | awk '{print $NF}')
   # If the process ID is not empty, print it
   if [ -n "$pid" ]; then
