@@ -13,6 +13,7 @@ rm -rf /tmp/.X1-lock
 mkdir -p /root/.vnc
 echo $VNC_PASSWD | vncpasswd -f > /root/.vnc/passwd 
 vncserver -kill :1
+chmod 600 /root/.vnc/passwd
 vncserver -PasswordFile /root/.vnc/passwd :4 &
 
 ttyd -p $TTYD_PORT -t 'theme={"foreground":"#fff","background":"#111", "cursor":"#943124"}' bash &
