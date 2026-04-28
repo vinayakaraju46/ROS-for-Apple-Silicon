@@ -1,11 +1,11 @@
-FROM --platform=linux/amd64 moveit/moveit2:humble-source
+FROM osrf/ros:jazzy-desktop
 
 COPY config /config
 # COPY config/xstartup /root/.vnc/xstartup
 
 RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     apt -y update && \
-    apt -y install novnc terminator \
+    apt -y install terminator \
     xfce4 xfce4-goodies \
     net-tools iputils-ping psmisc vim nano && \
     apt -y install wget && \
@@ -14,7 +14,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     wget https://github.com/tsl0922/ttyd/releases/download/1.6.3/ttyd.x86_64 && \
     cp ttyd.x86_64 /usr/local/bin/ttyd && \
     chmod +x /usr/local/bin/ttyd && \
-    apt -y install novnc tigervnc-standalone-server && \
+    apt -y install novnc  websockify dbus-x11 tigervnc-standalone-server && \
     cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
     apt -y install xfce4 xfce4-goodies && \
     apt -y install x11vnc && \
@@ -26,7 +26,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TZ="Etc/UTC" && \
     # echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc && \
     echo "alias restart-vncserver='bash /config/restartvncserver.sh'" >> ~/.bashrc \
     && echo "alias start-codeserver='cd /code-server-4.3.0-linux-amd64 && ./code-server --bind-addr 0.0.0.0:8080 --auth none'" >> ~/.bashrc \
-    && echo 'start-novnc() { /usr/share/novnc/utils/launch.sh --vnc 127.0.0.1:$1 --listen $2 & }' >> ~/.bashrc \
+    && echo 'start-novnc() { websockify --web /usr/share/novnc/ $1 localhost:$2 & }' >> ~/.bashrc \
     && echo 'start-ttyd() {' >> ~/.bashrc \
     && echo '    killall -9 ttyd' >> ~/.bashrc \
     && echo '    sleep 2' >> ~/.bashrc \

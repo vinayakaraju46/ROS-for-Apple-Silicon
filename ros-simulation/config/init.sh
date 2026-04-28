@@ -16,6 +16,6 @@ vncserver -kill :1
 vncserver -PasswordFile /root/.vnc/passwd :1 &
 
 ttyd -p $TTYD_PORT -t 'theme={"foreground":"#fff","background":"#111", "cursor":"#943124"}' bash &
-/usr/share/novnc/utils/launch.sh --vnc 127.0.0.1:5901 --listen $NOVNC_PORT &
+websockify --web /usr/share/novnc/ $NOVNC_PORT localhost:5904 &
 
 chmod +x /config/restartvncserver.sh
