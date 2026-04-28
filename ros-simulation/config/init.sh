@@ -13,7 +13,7 @@ rm -rf /tmp/.X1-lock
 mkdir -p /root/.vnc
 echo $VNC_PASSWD | vncpasswd -f > /root/.vnc/passwd 
 vncserver -kill :1
-vncserver -PasswordFile /root/.vnc/passwd :1 &
+vncserver -PasswordFile /root/.vnc/passwd :4 &
 
 ttyd -p $TTYD_PORT -t 'theme={"foreground":"#fff","background":"#111", "cursor":"#943124"}' bash &
 websockify --web /usr/share/novnc/ $NOVNC_PORT localhost:5904 &
